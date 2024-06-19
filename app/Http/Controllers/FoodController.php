@@ -15,8 +15,14 @@ class FoodController extends Controller
         $requestedAmount = $request->input('amount', 1);
         // Check if there are no materials
         if (empty($materials)) {
-            $menu = Menu::all()->random($requestedAmount);
-            return response()->json(['menus' => $menu]);
+            $menu = Menu::all();
+            if ($menu->count() < $requestedAmount) {
+                return response()->json([
+                    'message' => 'You requested ' . $requestedAmount . ' items, but there are only ' . $menu->count() . ' items available.'
+                ], 400); // 400 Bad Request
+            }
+            $randomMenu = $menu->random($requestedAmount);
+            return response()->json(['menus' => $randomMenu]);
         } else {
             // Query to find menus where all specified materials are included in at least one item in the `material` JSON array
             $menus = Menu::where(function ($query) use ($materials) {
