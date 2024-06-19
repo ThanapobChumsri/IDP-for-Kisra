@@ -18,7 +18,8 @@ class FoodController extends Controller
             $menu = Menu::all();
             if ($menu->count() < $requestedAmount) {
                 return response()->json([
-                    'message' => 'You requested ' . $requestedAmount . ' items, but there are only ' . $menu->count() . ' items available.'
+                    'message' => 'You requested ' . $requestedAmount . ' items, but there are only ' . $menu->count() . ' items available.',
+                    'menus' => $menu
                 ], 400); // 400 Bad Request
             }
             $randomMenu = $menu->random($requestedAmount);
@@ -39,7 +40,8 @@ class FoodController extends Controller
             // Check if there are enough filtered menus
             if ($filteredMenus->count() < $requestedAmount) {
                 return response()->json([
-                    'message' => 'You requested ' . $requestedAmount . ' items, but there are only ' . $filteredMenus->count() . ' items available.'
+                    'message' => 'You requested ' . $requestedAmount . ' items, but there are only ' . $filteredMenus->count() . ' items available.',
+                    'menus' => $filteredMenus
                 ], 400); // 400 Bad Request
             }
 
