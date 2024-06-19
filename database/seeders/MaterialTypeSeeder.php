@@ -20,6 +20,21 @@ class MaterialTypeSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+            [
+                'name' => 'dairy',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'bread',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'spicemix',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
         ]);
     }
 }
