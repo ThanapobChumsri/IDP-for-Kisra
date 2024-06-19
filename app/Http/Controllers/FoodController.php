@@ -11,6 +11,7 @@ class FoodController extends Controller
     {
         // Get the materials array from the request
         $materials = $request->input('materials', []);
+        // Get the requested amount, defaulting to 1 if not provided
         $requestedAmount = $request->input('amount', 1);
         // Check if there are no materials
         if (empty($materials)) {
@@ -28,8 +29,6 @@ class FoodController extends Controller
             $filteredMenus = $menus->filter(function ($menu) use ($materials) {
                 return count(array_intersect($menu->material, $materials)) === count($materials);
             });
-
-            // Get the requested amount, defaulting to 1 if not provided
 
             // Check if there are enough filtered menus
             if ($filteredMenus->count() < $requestedAmount) {
